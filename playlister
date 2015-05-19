@@ -1,11 +1,21 @@
 #! /usr/bin/env sh
 
-function check_config() {
+function set_naming_format() {
+  NAMING_FORMAT="%(playlist_index)s %(title)s.%(ext)s"
+}
+
+function set_default_values() {
+  NUMBER_OF_FILES_TO_KEEP=10
+}
+
+function check_dot_playlister() {
   if [ ! -f .playlister ];then
-    echo ".playlister not found. Create it and make sure the first line is the URL to the playlist." >&2
+    echo "Error: .playlister not found. Create it and make sure the first line is the URL of the playlist." >&2
+    echo "Press return to continue."
     exit 1
   elif [ ! -s .playlister ];then
-    echo ".playlister is empty. The first line must be the URL to the playlist." >&2
+    echo "Error: .playlister is empty. The first line must be the URL of the playlist." >&2
+    echo "Press return to continue."
     exit 2
   fi
 }
@@ -14,12 +24,12 @@ function get_playlist_url() {
   PLAYLIST_URL=$(head -n1 .playlister)
 }
 
-function define_naming_format() {
-  NAMING_FORMAT="%(playlist_index)s %(title)s.%(ext)s"
+function get_filecount() {
+  FILECOUNT=$(ls *.mp4 2>/dev/null | wc -l | tr -d " ")
 }
 
-function set_default_values() {
-  NUMBER_OF_FILES_TO_KEEP=10
+function get_lowest_id() {
+  LOWEST_ID=$(ls *.mp4 2>/dev/null | head -n1 | cut -d" " -f1 | sed 's/^0*//')
 }
 
 function calculate_bounds() {
@@ -33,6 +43,15 @@ function calculate_bounds() {
   PLALIST_END=$(($PLAYLIST_START + $NUMBER_OF_FILES_TO_KEEP - 1))
 }
 
+function check_if_moving_forward() {
+  if [ $PLAYLIST_START -le $LOWEST_ID ]; then
+    echo "Warning: Requested files are older than already existing ones. Downloading but refusing to delete." >&2
+    echo "Press Return to dowload or Ctrl-C to cancel."
+    SKIP_DELETE=true
+    read
+  fi
+}
+
 function download_active_part_of_playlist() {
   youtube-dl --playlist-start $PLAYLIST_START \
              --playlist-end $PLALIST_END \
@@ -41,18 +60,21 @@ function download_active_part_of_playlist() {
 }
 
 function delete_old_videos() {
-  FILECOUNT=$(ls *.mp4 2>/dev/null | wc -l | tr -d " ")
   NUMBER_OF_FILES_TO_DELETE=$(($FILECOUNT - $NUMBER_OF_FILES_TO_KEEP))
-
-  if [ $NUMBER_OF_FILES_TO_DELETE -gt 0 ];then
+  if [[ $SKIP_DELETE ]]; then
+    echo "Skipping delete step due to the requested files being older than already existing ones.\n"
+  elif [ $NUMBER_OF_FILES_TO_DELETE -gt 0 ];then
     ls *.mp4 | head -n $NUMBER_OF_FILES_TO_DELETE | perl -lne 'print quotemeta' | xargs rm
   fi
 }
 
-check_config
+check_dot_playlister
 get_playlist_url
-define_naming_format
+get_filecount
+get_lowest_id
+set_naming_format
 set_default_values
 calculate_bounds $1
+check_if_moving_forward
 download_active_part_of_playlist
 delete_old_videos
