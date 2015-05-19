@@ -14,8 +14,8 @@ function check_config() {
   fi
 }
 
-function set_variables_for_active_lp() {
-  LP_URL=$(cat .playlister|head -n1)
+function get_playlist_url() {
+  PLAYLIST_URL=$(cat .playlister|head -n1)
 }
 
 function set_global_variables() {
@@ -28,7 +28,7 @@ function set_global_variables() {
 function download_active_part_of_playlist() {
   youtube-dl --playlist-start $PLAYLIST_START \
              --playlist-end $PLALIST_END \
-             "$LP_URL" \
+             "$PLAYLIST_URL" \
              -o "$NAMING_FORMAT"
 }
 
@@ -42,7 +42,7 @@ function delete_old_videos() {
 }
 
 check_config $1
-set_variables_for_active_lp
+get_playlist_url
 set_global_variables $1
 download_active_part_of_playlist
 delete_old_videos
