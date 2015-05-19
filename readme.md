@@ -1,5 +1,9 @@
 # playlister
+Always keep 10 unwatched videos of a playlist on your disk. 
 
+Simply open rangen and press `P` on the video you are currently watching. Playlister makes sure you have 10 videos downloaded and cleans up old videos if you have any more.
+
+## how it works
 Playlister searches for a `.playlister` file in the current directory and uses the first line as the URL for the playlist to download. It downloads 10 files starting with the number that is passed as an argument.
 
 If there are more than 10 .mp4 files in the current directory it deletes as many files as necessary, starting with the lowest IDs.
