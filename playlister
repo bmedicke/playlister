@@ -1,6 +1,6 @@
 #! /usr/bin/env sh
 
-function check_for_config() {
+function check_config() {
   if [ ! -f .playlister ];then
     echo ".playlister not found. Add it with the first line being the URL to the playlist." >&2
     exit 1
@@ -41,7 +41,7 @@ function delete_old_videos() {
   fi
 }
 
-check_for_config $1
+check_config $1
 set_variables_for_active_lp
 set_global_variables $1
 download_active_part_of_playlist
