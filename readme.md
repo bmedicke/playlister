@@ -15,3 +15,6 @@ _rc.conf_
 
 The passed along filename will be cut off at the first space and used as starting point for the download. This makes it necessary to use a youtube-dl naming format that starts with %(playlist_index)s.
 
+## installation
+
+Copy playlister to somewhere in your path and make sure it's executable. Add the above mapping to ranger.
