@@ -2,7 +2,7 @@
 
 function check_config() {
   if [ ! -f .playlister ];then
-    echo ".playlister not found. Add it with the first line being the URL to the playlist." >&2
+    echo ".playlister not found. Create it and make sure the first line is the URL to the playlist." >&2
     exit 1
   elif [ ! -s .playlister ];then
     echo ".playlister is empty. The first line must be the URL to the playlist." >&2
