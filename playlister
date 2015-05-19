@@ -8,7 +8,7 @@ function check_for_config() {
     echo ".playlister is empty. The first line must be the URL to the playlist." >&2
     exit 2
   elif [ "$1" == "" ]; then
-    echo "No parameter passed. Call it from within ranger or with the number of first video to download." >&2
+    echo "No parameter passed. Call it from within ranger or with the number of the first video to download." >&2
     echo $1
     exit 3
   fi
@@ -19,18 +19,17 @@ function set_variables_for_active_lp() {
 }
 
 function set_global_variables() {
+  NAMING_FORMAT="%(playlist_index)s %(title)s.%(ext)s"
   NUMBER_OF_FILES_TO_KEEP=10
-  YOUTUBE_DL_FORMAT="%(playlist_index)s %(title)s.%(ext)s"
-  LEAST_RECENT_TO_DOWNLOAD=$(echo $1|cut -d" " -f1)
-  LP_PATH="$(pwd)"
-  MOST_RECENT_TO_DOWNLOAD=$(($LEAST_RECENT_TO_DOWNLOAD + $NUMBER_OF_FILES_TO_KEEP - 1))
+  PLAYLIST_START=$(echo $1|cut -d" " -f1)
+  PLALIST_END=$(($PLAYLIST_START + $NUMBER_OF_FILES_TO_KEEP - 1))
 }
 
 function download_active_part_of_playlist() {
-  youtube-dl --playlist-start $LEAST_RECENT_TO_DOWNLOAD \
-             --playlist-end $MOST_RECENT_TO_DOWNLOAD \
+  youtube-dl --playlist-start $PLAYLIST_START \
+             --playlist-end $PLALIST_END \
              "$LP_URL" \
-             -o "$YOUTUBE_DL_FORMAT"
+             -o "$NAMING_FORMAT"
 }
 
 function delete_old_videos() {
@@ -38,7 +37,7 @@ function delete_old_videos() {
   NUMBER_OF_FILES_TO_DELETE=$(($FILECOUNT - $NUMBER_OF_FILES_TO_KEEP))
 
   if [ $NUMBER_OF_FILES_TO_DELETE -gt 0 ];then
-    ls *.mp4 | grep -v *.sh | head -n $NUMBER_OF_FILES_TO_DELETE | perl -lne 'print quotemeta' | xargs rm
+    ls *.mp4 | head -n $NUMBER_OF_FILES_TO_DELETE | perl -lne 'print quotemeta' | xargs rm
   fi
 }
 
