@@ -1,5 +1,5 @@
 # playlister
-Always keep 10 unwatched videos of a playlist on your disk. 
+Always keep 10 unwatched videos of a playlist on your disk while avoiding to clutter your SSD. 
 
 Simply open rangen and press `P` on the video you are currently watching. Playlister makes sure you have 10 videos downloaded and cleans up old videos if you have any more than that.
 
