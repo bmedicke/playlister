@@ -21,7 +21,7 @@ function set_variables_for_active_lp() {
 function set_global_variables() {
   NAMING_FORMAT="%(playlist_index)s %(title)s.%(ext)s"
   NUMBER_OF_FILES_TO_KEEP=10
-  PLAYLIST_START=$(echo $1|cut -d" " -f1)
+  PLAYLIST_START=$(echo $1|cut -d" " -f1|sed 's/^0*//')
   PLALIST_END=$(($PLAYLIST_START + $NUMBER_OF_FILES_TO_KEEP - 1))
 }
 
