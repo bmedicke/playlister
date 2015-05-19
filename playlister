@@ -15,7 +15,7 @@ function check_config() {
 }
 
 function get_playlist_url() {
-  PLAYLIST_URL=$(cat .playlister|head -n1)
+  PLAYLIST_URL=$(head -n1 .playlister)
 }
 
 function define_naiming_format() {
