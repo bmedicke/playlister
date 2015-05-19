@@ -23,7 +23,7 @@ function set_default_values() {
 }
 
 function calculate_bounds() {
-  PLAYLIST_START=$(echo $1|cut -d" " -f1|sed 's/^0*//')
+  PLAYLIST_START=$(echo $1 | cut -d" " -f1 | sed 's/^0*//')
 
   case $PLAYLIST_START in
     '' | *[!0-9]*)
@@ -41,7 +41,7 @@ function download_active_part_of_playlist() {
 }
 
 function delete_old_videos() {
-  FILECOUNT=$(ls *.mp4|wc -l|tr -d " ")
+  FILECOUNT=$(ls *.mp4 2>/dev/null | wc -l | tr -d " ")
   NUMBER_OF_FILES_TO_DELETE=$(($FILECOUNT - $NUMBER_OF_FILES_TO_KEEP))
 
   if [ $NUMBER_OF_FILES_TO_DELETE -gt 0 ];then
