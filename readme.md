@@ -8,6 +8,12 @@ Playlister searches for a `.playlister` file in the current directory and uses t
 
 If there are more than 10 .mp4 files in the current directory it deletes as many files as necessary, starting with the lowest IDs.
 
+## installation
+
+* install youtube-dl
+* copy playlister to somewhere in your path and make sure it's executable
+* add the above mapping to ranger
+
 ## ranger integration
 
 Use this mapping to call it from within ranger.
@@ -18,9 +24,3 @@ _rc.conf_
     map P shell playlister %s
 
 _Note_: The passed along filename will be cut off at the first space and used as starting point for the download. This makes it necessary to use a youtube-dl naming format that starts with %(playlist_index)s.
-
-## installation
-
-* install youtube-dl
-* copy playlister to somewhere in your path and make sure it's executable
-* add the above mapping to ranger
