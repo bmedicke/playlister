@@ -2,13 +2,13 @@
 
 function check_for_config() {
   if [ ! -f .playlister ];then
-    echo ".playlister not found. Add it with URL to playlist." >&2
+    echo ".playlister not found. Add it with the first line being the URL to the playlist." >&2
     exit 1
   elif [ ! -s .playlister ];then
-    echo ".playlister is empty. Add URL to playlist." >&2
+    echo ".playlister is empty. The first line must be the URL to the playlist." >&2
     exit 2
   elif [ "$1" == "" ]; then
-    echo "No parameter passed. Call from within ranger or with number of first video to download" >&2
+    echo "No parameter passed. Call it from within ranger or with the number of first video to download." >&2
     echo $1
     exit 3
   fi
