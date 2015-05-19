@@ -1,6 +1,6 @@
 # playlister
 
-Playlister searches for a `.playlister` file in the current directory and uses the first line as the URL for the playlist. It downloads 10 files starting with the number that is passed as an argument.
+Playlister searches for a `.playlister` file in the current directory and uses the first line as the URL for the playlist to download. It downloads 10 files starting with the number that is passed as an argument.
 
 If there are more than 10 .mp4 files in the current directory it deletes as many files as necessary, starting with the lowest IDs.
 
