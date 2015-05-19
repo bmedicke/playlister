@@ -1,11 +1,25 @@
 #! /usr/bin/env sh
 
+function check_for_config() {
+  if [ ! -f .playlister ];then
+    echo ".playlister not found. Add it with URL to playlist." >&2
+    exit 1
+  elif [ ! -s .playlister ];then
+    echo ".playlister is empty. Add URL to playlist." >&2
+    exit 2
+  elif [ "$1" == "" ]; then
+    echo "No parameter passed. Call from within ranger or with number of first video to download" >&2
+    echo $1
+    exit 3
+  fi
+}
+
 function set_variables_for_active_lp() {
-  LP_URL="https://www.youtube.com/playlist?list=PL3289DD0D0F0CD4A3"
-  NUMBER_OF_FILES_TO_KEEP=10
+  LP_URL=$(cat .playlister|head -n1)
 }
 
 function set_global_variables() {
+  NUMBER_OF_FILES_TO_KEEP=10
   YOUTUBE_DL_FORMAT="%(playlist_index)s %(title)s.%(ext)s"
   LEAST_RECENT_TO_DOWNLOAD=$(echo $1|cut -d" " -f1)
   LP_PATH="$(pwd)"
@@ -28,8 +42,8 @@ function delete_old_videos() {
   fi
 }
 
+check_for_config $1
 set_variables_for_active_lp
 set_global_variables $1
 download_active_part_of_playlist
 delete_old_videos
-
