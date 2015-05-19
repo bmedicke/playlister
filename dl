@@ -1,0 +1,35 @@
+#! /usr/bin/env sh
+
+function set_variables_for_active_lp() {
+  LP_URL="https://www.youtube.com/playlist?list=PL3289DD0D0F0CD4A3"
+  NUMBER_OF_FILES_TO_KEEP=10
+}
+
+function set_global_variables() {
+  YOUTUBE_DL_FORMAT="%(playlist_index)s %(title)s.%(ext)s"
+  LEAST_RECENT_TO_DOWNLOAD=$(echo $1|cut -d" " -f1)
+  LP_PATH="$(pwd)"
+  MOST_RECENT_TO_DOWNLOAD=$(($LEAST_RECENT_TO_DOWNLOAD + $NUMBER_OF_FILES_TO_KEEP - 1))
+}
+
+function download_active_part_of_playlist() {
+  youtube-dl --playlist-start $LEAST_RECENT_TO_DOWNLOAD \
+             --playlist-end $MOST_RECENT_TO_DOWNLOAD \
+             "$LP_URL" \
+             -o "$YOUTUBE_DL_FORMAT"
+}
+
+function delete_old_videos() {
+  FILECOUNT=$(ls *.mp4|wc -l|tr -d " ")
+  NUMBER_OF_FILES_TO_DELETE=$(($FILECOUNT - $NUMBER_OF_FILES_TO_KEEP))
+
+  if [ $NUMBER_OF_FILES_TO_DELETE -gt 0 ];then
+    ls *.mp4 | grep -v *.sh | head -n $NUMBER_OF_FILES_TO_DELETE | perl -lne 'print quotemeta' | xargs rm
+  fi
+}
+
+set_variables_for_active_lp
+set_global_variables $1
+download_active_part_of_playlist
+delete_old_videos
+
