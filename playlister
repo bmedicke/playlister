@@ -7,9 +7,6 @@ function check_config() {
   elif [ ! -s .playlister ];then
     echo ".playlister is empty. The first line must be the URL to the playlist." >&2
     exit 2
-  elif [ "$1" == "" ]; then
-    echo "No parameter passed. Call it from within ranger or with the number of the first video to download." >&2
-    exit 3
   fi
 }
 
@@ -27,6 +24,12 @@ function set_default_values() {
 
 function calculate_bounds() {
   PLAYLIST_START=$(echo $1|cut -d" " -f1|sed 's/^0*//')
+
+  case $PLAYLIST_START in
+    '' | *[!0-9]*)
+      PLAYLIST_START=1;;
+  esac
+
   PLALIST_END=$(($PLAYLIST_START + $NUMBER_OF_FILES_TO_KEEP - 1))
 }
 
@@ -46,7 +49,7 @@ function delete_old_videos() {
   fi
 }
 
-check_config $1
+check_config
 get_playlist_url
 define_naming_format
 set_default_values
