@@ -9,7 +9,6 @@ function check_config() {
     exit 2
   elif [ "$1" == "" ]; then
     echo "No parameter passed. Call it from within ranger or with the number of the first video to download." >&2
-    echo $1
     exit 3
   fi
 }
