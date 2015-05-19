@@ -18,7 +18,7 @@ function get_playlist_url() {
   PLAYLIST_URL=$(cat .playlister|head -n1)
 }
 
-function define_namin_format() {
+function define_naiming_format() {
   NAMING_FORMAT="%(playlist_index)s %(title)s.%(ext)s"
 }
 
@@ -49,7 +49,7 @@ function delete_old_videos() {
 
 check_config $1
 get_playlist_url
-define_namin_format
+define_naiming_format
 set_default_values
 calculate_bounds $1
 download_active_part_of_playlist
