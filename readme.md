@@ -14,8 +14,8 @@ If there are more than 10 .mp4 files in the current directory it deletes as many
 ## installation
 
 * install youtube-dl
-* copy playlister to somewhere in your path and make sure it's executable
-* add the above mapping to ranger
+* copy playlister to somewhere in your path
+* optionally add a mapping for ranger
 
 ## ranger integration
 
@@ -26,4 +26,4 @@ _rc.conf_
     # run playlister and pass name of file under cursor:
     map P shell playlister %s
 
-_Note_: The passed along filename will be cut off at the first space and used as starting point for the download. This makes it necessary to use a youtube-dl naming format that starts with %(playlist_index)s.
+_Note in case you decide to change the naming format_: The passed along filename will be cut off at the first space and used as starting point for the download. This makes it necessary to use a youtube-dl naming format that starts with %(playlist_index)s.
