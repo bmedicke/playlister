@@ -36,7 +36,7 @@ handle_options() {
     case $opt in
     h|help     )  usage; exit 0   ;;
     v|version  )  echo "$(basename "$0") v$__ScriptVersion"; exit 0   ;;
-    * )  echo "\nOption does not exist : $OPTARG\n"
+    * )  printf "\nOption does not exist : %s\n" "$OPTARG"
         usage; exit 1   ;;
     esac
   done
@@ -95,7 +95,7 @@ download_active_part_of_playlist() {
 delete_old_videos() {
   NUMBER_OF_FILES_TO_DELETE=$(($FILECOUNT - $NUMBER_OF_FILES_TO_KEEP))
   if [ $SKIP_DELETE ]; then
-    echo "Skipping delete step due to the requested files being older than already existing ones.\n\n"
+    printf "Skipping delete step due to the requested files being older than already existing ones.\n\n"
   elif [ $NUMBER_OF_FILES_TO_DELETE -gt 0 ];then
     ls ./*.mp4 | head -n $NUMBER_OF_FILES_TO_DELETE | perl -lne 'print quotemeta' | xargs rm
   fi
