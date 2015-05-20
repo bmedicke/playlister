@@ -58,11 +58,11 @@ get_playlist_url() {
 }
 
 get_filecount() {
-  FILECOUNT=$(ls *.mp4 2>/dev/null | wc -l | tr -d " ")
+  FILECOUNT=$(ls ./*.mp4 2>/dev/null | wc -l | tr -d " ")
 }
 
 get_lowest_id() {
-  LOWEST_ID=$(ls *.mp4 2>/dev/null | head -n1 | cut -d" " -f1 | sed 's/^0*//')
+  LOWEST_ID=$(ls ./*.mp4 2>/dev/null | head -n1 | cut -d" " -f1 | sed 's/^0*//')
 }
 
 calculate_bounds() {
@@ -97,7 +97,7 @@ delete_old_videos() {
   if [[ $SKIP_DELETE ]]; then
     echo "Skipping delete step due to the requested files being older than already existing ones.\n\n"
   elif [ $NUMBER_OF_FILES_TO_DELETE -gt 0 ];then
-    ls *.mp4 | head -n $NUMBER_OF_FILES_TO_DELETE | perl -lne 'print quotemeta' | xargs rm
+    ls ./*.mp4 | head -n $NUMBER_OF_FILES_TO_DELETE | perl -lne 'print quotemeta' | xargs rm
   fi
 }
 
