@@ -1,5 +1,5 @@
 #! /usr/bin/env sh
-__ScriptVersion="0.1"
+__ScriptVersion="0.1.1"
 
 function set_naming_format() {
   NAMING_FORMAT="%(playlist_index)s %(title)s.%(ext)s"
@@ -104,11 +104,11 @@ function delete_old_videos() {
 handle_options $@
 check_dot_playlister
 get_playlist_url
-get_filecount
 get_lowest_id
 set_naming_format
 set_default_values
 calculate_bounds $1
 check_if_moving_forward
 download_active_part_of_playlist
+get_filecount
 delete_old_videos
