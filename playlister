@@ -11,7 +11,7 @@ set_default_values() {
 
 usage ()
 {
-  BASENAME="$(basename $0)"
+  BASENAME="$(basename "$0")"
   echo "Usage: $BASENAME [options] [filename/ID]
 
 Options:
@@ -35,7 +35,7 @@ handle_options() {
   do
     case $opt in
     h|help     )  usage; exit 0   ;;
-    v|version  )  echo "$(basename $0) v$__ScriptVersion"; exit 0   ;;
+    v|version  )  echo "$(basename "$0") v$__ScriptVersion"; exit 0   ;;
     * )  echo "\nOption does not exist : $OPTARG\n"
         usage; exit 1   ;;
     esac
@@ -66,7 +66,7 @@ get_lowest_id() {
 }
 
 calculate_bounds() {
-  PLAYLIST_START=$(echo $1 | cut -d" " -f1 | sed 's/^0*//')
+  PLAYLIST_START=$(echo "$1" | cut -d" " -f1 | sed 's/^0*//')
 
   case $PLAYLIST_START in
     '' | *[!0-9]*)
@@ -101,13 +101,13 @@ delete_old_videos() {
   fi
 }
 
-handle_options $@
+handle_options "$@"
 check_dot_playlister
 get_playlist_url
 get_lowest_id
 set_naming_format
 set_default_values
-calculate_bounds $1
+calculate_bounds "$1"
 check_if_moving_forward
 download_active_part_of_playlist
 get_filecount
