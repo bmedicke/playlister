@@ -81,7 +81,7 @@ check_if_moving_forward() {
     echo "Warning: Requested files are older than already existing ones. Downloading but refusing to delete." >&2
     echo "Press Return to dowload or Ctrl-C to cancel."
     SKIP_DELETE=true
-    read
+    read REPLY
   fi
 }
 
