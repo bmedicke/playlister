@@ -11,7 +11,8 @@ function set_default_values() {
 
 function usage ()
 {
-  echo "Usage: $(basename $0) [options] [filename/ID]
+  BASENAME="$(basename $0)"
+  echo "Usage: $BASENAME [options] [filename/ID]
 
 Options:
   -h            Display this message.
@@ -23,7 +24,7 @@ Filename:
 ID:
   Number represeting the position in the playlist. Defaults to 1.
 
-Playlister searches for a .playlister file in the current directory and uses
+$BASENAME searches for a .playlister file in the current directory and uses
 the first line as the playlist URL. 
 It fetches 10 files starting with the number that is passed as an argument.
 "
