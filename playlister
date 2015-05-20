@@ -45,10 +45,10 @@ function handle_options() {
 
 function check_dot_playlister() {
   if [ ! -f .playlister ];then
-    echo "Error: .playlister not found. Create it and make sure the first line is the URL of the playlist." >&2
+    echo "Error: .playlister not found. Create it and make sure the first line is the URL of the playlist. See -h" >&2
     exit 2
   elif [ ! -s .playlister ];then
-    echo "Error: .playlister is empty. The first line must be the URL of the playlist." >&2
+    echo "Error: .playlister is empty. The first line must be the URL of the playlist. See -h" >&2
     exit 3
   fi
 }
