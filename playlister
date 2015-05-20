@@ -40,7 +40,7 @@ handle_options() {
         usage; exit 1   ;;
     esac
   done
-  shift $(($OPTIND-1))
+  shift $((OPTIND-1))
 }
 
 check_dot_playlister() {
@@ -73,7 +73,7 @@ calculate_bounds() {
       PLAYLIST_START=1;;
   esac
 
-  PLALIST_END=$(($PLAYLIST_START + $NUMBER_OF_FILES_TO_KEEP - 1))
+  PLALIST_END=$((PLAYLIST_START + NUMBER_OF_FILES_TO_KEEP - 1))
 }
 
 check_if_moving_forward() {
@@ -93,7 +93,7 @@ download_active_part_of_playlist() {
 }
 
 delete_old_videos() {
-  NUMBER_OF_FILES_TO_DELETE=$(($FILECOUNT - $NUMBER_OF_FILES_TO_KEEP))
+  NUMBER_OF_FILES_TO_DELETE=$((FILECOUNT - NUMBER_OF_FILES_TO_KEEP))
   if [ $SKIP_DELETE ]; then
     printf "Skipping delete step due to the requested files being older than already existing ones.\n\n"
   elif [ $NUMBER_OF_FILES_TO_DELETE -gt 0 ];then
