@@ -1,5 +1,5 @@
 #! /usr/bin/env sh
-__ScriptVersion="0.1.1"
+__ScriptVersion="0.2.0"
 
 set_naming_format() {
   NAMING_FORMAT="%(playlist_index)s %(title)s.%(ext)s"
