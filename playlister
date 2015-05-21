@@ -62,7 +62,7 @@ get_filecount() {
 }
 
 get_lowest_id() {
-  LOWEST_ID=$(ls ./*.mp4 2>/dev/null | head -n1 | cut -d" " -f1 | sed 's/^0*//')
+  LOWEST_ID=$(ls *.mp4 2>/dev/null | head -n1 | cut -d" " -f1 | sed 's/^0*//')
 }
 
 calculate_bounds() {
