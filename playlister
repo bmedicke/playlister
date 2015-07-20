@@ -57,6 +57,10 @@ get_playlist_url() {
   PLAYLIST_URL=$(head -n1 .playlister)
 }
 
+get_optional_switches() {
+  OPTIONAL_SWITCHES=$(head -n2 .playlister|tail -n1)
+}
+
 get_filecount() {
   FILECOUNT=$(ls ./*.mp4 2>/dev/null | wc -l | tr -d " ")
 }
@@ -89,7 +93,8 @@ download_active_part_of_playlist() {
   youtube-dl --playlist-start $PLAYLIST_START \
              --playlist-end $PLALIST_END \
              "$PLAYLIST_URL" \
-             -o "$NAMING_FORMAT"
+             -o "$NAMING_FORMAT" \
+             $OPTIONAL_SWITCHES
 }
 
 delete_old_videos() {
@@ -104,6 +109,7 @@ delete_old_videos() {
 handle_options "$@"
 check_dot_playlister
 get_playlist_url
+get_optional_switches
 get_lowest_id
 set_naming_format
 set_default_values
