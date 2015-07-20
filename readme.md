@@ -1,5 +1,5 @@
 # playlister
-Keeps the 10 least recent, unwatched videos of a playlist on your disk. Always have something to watch and avoid cluttering your SSD. 
+Keeps the 10 least recent, unwatched videos of a youtube playlist on your disk. Always have something to watch and avoid cluttering your SSD. 
 
 
 ## how to use it
