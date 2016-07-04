@@ -1,5 +1,5 @@
 #! /usr/bin/env sh
-__ScriptVersion="0.2.1"
+__ScriptVersion="0.2.2"
 
 set_default_values() {
   NUMBER_OF_FILES_TO_KEEP=7
