@@ -1,12 +1,13 @@
 #! /usr/bin/env sh
 __ScriptVersion="0.2.1"
 
-set_naming_format() {
-  NAMING_FORMAT="%(playlist_index)s %(title)s.%(ext)s"
+set_default_values() {
+  NUMBER_OF_FILES_TO_KEEP=7
+  QUALITY="best[height=720]"
 }
 
-set_default_values() {
-  NUMBER_OF_FILES_TO_KEEP=10
+set_naming_format() {
+  NAMING_FORMAT="%(playlist_index)s %(title)s.%(ext)s"
 }
 
 usage ()
@@ -94,6 +95,7 @@ download_active_part_of_playlist() {
              --playlist-end $PLALIST_END \
              "$PLAYLIST_URL" \
              -o "$NAMING_FORMAT" \
+             -f "$QUALITY" \
              $OPTIONAL_SWITCHES
 }
 
