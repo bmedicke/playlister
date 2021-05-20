@@ -10,7 +10,7 @@ Keeps the 10 least recent, unwatched videos of a youtube playlist on your disk. 
 
 After watching one or more videos open rangen and press `P` on the first unwatched video. Playlister will make sure you have up to 10 videos and clean up anything more than that.
 
-### passing additional parameters for youtube-dl
+### passing additional parameters to youtube-dl
 
 Simply put them on the second line:
 
