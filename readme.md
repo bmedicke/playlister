@@ -16,7 +16,7 @@ Simply put them on the second line:
 
 ```sh
 https://www.youtube.com/playlist?list=XXXXXX
---cookies cookies.txt --extract-audio
+--cookies cookies.txt --extract-audio --audio-format mp3 --keep-video
 ```
 
 ## how it works
