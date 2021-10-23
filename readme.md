@@ -10,7 +10,7 @@ Keeps the 10 least recent, unwatched videos of a youtube playlist on your disk. 
 
 After watching one or more videos open rangen and press `P` on the first unwatched video. Playlister will make sure you have up to 10 videos and clean up anything more than that.
 
-### passing additional parameters to youtube-dl
+### passing additional parameters to yt-dlp
 
 Simply put them on the second line:
 
@@ -20,11 +20,11 @@ https://www.youtube.com/playlist?list=XXXXXX
 ```
 
 ## how it works
-Playlister searches for a `.playlister` file in the current directory and uses the first line as the URL for the playlist to download. The second line is passed along to youtube-dl as optional switches. It fetches 10 files starting with the number that is passed as an argument (or extracted from a filename). If the first argument is no number or is empty it defaults to 1. 
+Playlister searches for a `.playlister` file in the current directory and uses the first line as the URL for the playlist to download. The second line is passed along to yt-dlp as optional switches. It fetches 10 files starting with the number that is passed as an argument (or extracted from a filename). If the first argument is no number or is empty it defaults to 1. 
 
 ## installation
 
-* install youtube-dl
+* install yt-dlp
 * make sure playlister is in your path
 * optionally add a mapping for ranger
 

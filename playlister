@@ -1,5 +1,5 @@
 #! /usr/bin/env sh
-__ScriptVersion="0.2.2"
+__ScriptVersion="0.3.2"
 
 set_default_values() {
   NUMBER_OF_FILES_TO_KEEP=7
@@ -91,7 +91,7 @@ check_if_moving_forward() {
 }
 
 download_active_part_of_playlist() {
-  youtube-dl --playlist-start $PLAYLIST_START \
+  yt-dlp --playlist-start $PLAYLIST_START \
              --playlist-end $PLALIST_END \
              "$PLAYLIST_URL" \
              -o "$NAMING_FORMAT" \
