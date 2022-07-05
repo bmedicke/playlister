@@ -96,6 +96,7 @@ download_active_part_of_playlist() {
              "$PLAYLIST_URL" \
              -o "$NAMING_FORMAT" \
              -f "$QUALITY" \
+             -R "infinite" \
              $OPTIONAL_SWITCHES
 }
 
